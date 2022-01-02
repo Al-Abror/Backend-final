@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'email is not valid']
     },
     no_hp: {
-        type: Number,
+        type: String,
         required : [true, 'phone number is required'],
         unique : true,
         validate : phoneValidator,
@@ -38,12 +38,24 @@ const userSchema = new mongoose.Schema({
         lowercase : true,
         required: [true, 'gender is required']
     },
-    role : {
+    role: {
         type: String,
-        enum: ['admin', 'user'],
+        enum: ['admin', 'user', 'psikolog'],
         lowercase : true,
         required: true
-    }
+    },
+    member: {
+        type: String,
+        enum: ['member', 'not member'],
+        lowercase : true,
+        required: true
+    },
+    jadwalKonsultasi: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'konsultasi'
+        }
+    ]
 }, timestamps)
 
 const UserModel = mongoose.model('User', userSchema)

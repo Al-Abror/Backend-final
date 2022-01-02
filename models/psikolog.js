@@ -16,10 +16,12 @@ const psikologSchema = new mongoose.Schema({
         type: String,
         required : true
     },
-    testimoni: {
-        type: String,
-        required : true
-    },
+    testimoni: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'testiPsikolog'
+        }
+    ],
     gambar: {
         type: String,
         required : true
