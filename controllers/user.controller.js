@@ -5,7 +5,7 @@ const salt = bcrypt.genSaltSync(10);
 class UserController {
   static async registerUser(req, res) {
     try {
-      const {name, email, password, gender, no_hp, role} = await req.body;
+      const {name, email, password, gender, no_hp, role, member, jadwalKonsultasi} = await req.body;
       const hashpw = bcrypt.hashSync(password, salt)
       const newUser = new User({
         name: name,
@@ -13,7 +13,9 @@ class UserController {
         password : hashpw,
         gender: gender,
         no_hp: no_hp,
-        role : role
+        role : role,
+        member : member,
+        jadwalKonsultasi : jadwalKonsultasi
       })
       await newUser.save()
       .then(result => {
@@ -36,7 +38,7 @@ class UserController {
           const opt = {
             new : true
           }
-          const {name, email, password, gender, no_hp, role} = await req.body;
+          const {name, email, password, gender, no_hp, role, member, jadwalKonsultasi} = await req.body;
           const hashpw = bcrypt.hashSync(password, salt)
           const newUser = {
             name: name,
@@ -44,7 +46,9 @@ class UserController {
             password : hashpw,
             gender: gender,
             no_hp: no_hp,
-            role : role
+            role : role,
+            member : member,
+            jadwalKonsultasi : jadwalKonsultasi
           }
           await User.findOneAndUpdate({_id : req.params.id}, newUser, opt)
           res.status(201).json({
@@ -52,6 +56,9 @@ class UserController {
           })
           break;
         case 'admin':
+          res.sendStatus(403);
+          break;
+        case 'psikolog':
           res.sendStatus(403);
           break;
         default:

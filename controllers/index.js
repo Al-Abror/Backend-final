@@ -10,4 +10,8 @@ module.exports = {
     TimController : require('./tim.controller'),
     UserController: require('./user.controller'),
     WebinarController: require('./webinar.controller'),
+    KonsultasiController: require('./konsultasi.controller'),
+    PaketController: require('./paket.controller'),
+    TestiPsikologController: require('./testiPsikolog.controller')
+
 } 

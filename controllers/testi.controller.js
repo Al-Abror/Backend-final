@@ -43,6 +43,8 @@ class TestimoniController {
             })
           })
           break;
+        case 'psikolog':
+          res.sendStatus(403);
         default:
           res.sendStatus(404)
       }    
@@ -72,6 +74,8 @@ class TestimoniController {
             })
           })
           break;
+        case 'psikolog':
+          res.sendStatus(403);
         default:
           res.sendStatus(404)
       }   
@@ -100,6 +104,8 @@ class TestimoniController {
             })
           })
           break;
+        case 'psikolog':
+          res.sendStatus(403);
         default:
           res.sendStatus(404)
       }    

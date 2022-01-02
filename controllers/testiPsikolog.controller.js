@@ -1,31 +1,31 @@
-const { Webinar } = require('../models')
+const { TestiPsikolog } = require('../models')
 
-class WebinarController {
+class TestiPsikologController {
 
-  static async getWebinar(req, res) {
+  static async getTestiPsikolog(req, res) {
     try {
-      const webinarData = await Webinar.find()
-      res.status(200).json(webinarData)
+      const TestiPsikologData = await TestiPsikolog.find()
+      res.status(200).json(TestiPsikologData)
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
     }
   }
 
-  static async getWebinarById(req, res) {
+  static async getTestiPsikologById(req, res) {
     try {
-      await Webinar.findOne({_id : req.params.id})
-      .then(webinar => {
-        if(!webinar) {
+      await TestiPsikolog.findOne({_id : req.params.id})
+      .then(testiPsikolog => {
+        if(!testiPsikolog) {
           res.sendStatus(404)
         }
-        res.status(200).json(webinar)
+        res.status(200).json(testiPsikolog)
       })
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
     }
   }
 
-  static async postWebinar(req, res) { 
+  static async postTestiPsikolog(req, res) { 
     try {
       const { role } = req.user
       switch(role) {
@@ -33,18 +33,19 @@ class WebinarController {
           res.sendStatus(403);
           break;
         case 'admin':
-          const webinarData = await req.body;
-          const newWebinar = new Webinar(webinarData)
-          await newWebinar.save()
+          const TestiPsikologData = await req.body;
+          const newTestiPsikolog = new TestiPsikolog(TestiPsikologData)
+          await newTestiPsikolog.save()
           .then(result => {
             res.status(201).json({
-              message : "webinar added",
+              message : "Testi Psikolog added",
               result
             })
           })
           break;
         case 'psikolog':
           res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }    
@@ -53,7 +54,7 @@ class WebinarController {
     }
   }
 
-  static async updateWebinar(req, res) {
+  static async updateTestiPsikolog(req, res) {
     try {
       const { role } = req.user
       switch(role) {
@@ -64,18 +65,19 @@ class WebinarController {
           const opt = {
             new : true
           }
-          await Webinar.findOneAndUpdate({_id : req.params.id}, req.body, opt)
-          .then(webinar => {
-            if(!webinar) {
+          await TestiPsikolog.findOneAndUpdate({_id : req.params.id}, req.body, opt)
+          .then(testiPsikolog => {
+            if(!testiPsikolog) {
               res.sendStatus(404)
             }
             res.status(201).json({
-              message : "webinar updated"
+              message : "Testi Psikolog updated"
             })
           })
           break;
         case 'psikolog':
           res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }   
@@ -84,7 +86,7 @@ class WebinarController {
     }
   }
 
-  static async deleteWebinar(req, res) {
+  static async deleteTestiPsikolog(req, res) {
     try {
       const { role } = req.user
       switch(role) {
@@ -92,20 +94,21 @@ class WebinarController {
           res.sendStatus(403);
           break;
         case 'admin':
-          const webinar = Webinar.findOneAndDelete({_id : req.params.id})
+          const testiPsikolog = TestiPsikolog.findOneAndDelete({_id : req.params.id})
           .then(result => {
-            if (!webinar) {
+            if (!testiPsikolog) {
               res.status(404).json({
-                message : "webinar not found",
+                message : "Testi Psikolog not found",
               })
             }
             res.status(201).json({
-              message : "webinar deleted",
+              message : "Testi Psikolog deleted",
             })
           })
           break;
         case 'psikolog':
           res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }    
@@ -116,4 +119,4 @@ class WebinarController {
   }
 }
 
-module.exports = WebinarController
+module.exports = TestiPsikologController

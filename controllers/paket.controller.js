@@ -1,31 +1,31 @@
-const { Webinar } = require('../models')
+const { Paket } = require('../models')
 
-class WebinarController {
+class PaketController {
 
-  static async getWebinar(req, res) {
+  static async getPaket(req, res) {
     try {
-      const webinarData = await Webinar.find()
-      res.status(200).json(webinarData)
+      const PaketData = await Paket.find()
+      res.status(200).json(PaketData)
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
     }
   }
 
-  static async getWebinarById(req, res) {
+  static async getPaketById(req, res) {
     try {
-      await Webinar.findOne({_id : req.params.id})
-      .then(webinar => {
-        if(!webinar) {
+      await Paket.findOne({_id : req.params.id})
+      .then(paket => {
+        if(!paket) {
           res.sendStatus(404)
         }
-        res.status(200).json(webinar)
+        res.status(200).json(paket)
       })
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
     }
   }
 
-  static async postWebinar(req, res) { 
+  static async postPaket(req, res) { 
     try {
       const { role } = req.user
       switch(role) {
@@ -33,18 +33,19 @@ class WebinarController {
           res.sendStatus(403);
           break;
         case 'admin':
-          const webinarData = await req.body;
-          const newWebinar = new Webinar(webinarData)
-          await newWebinar.save()
+          const PaketData = await req.body;
+          const newPaket = new Paket(PaketData)
+          await newPaket.save()
           .then(result => {
             res.status(201).json({
-              message : "webinar added",
+              message : "Paket Konsultasi added",
               result
             })
           })
           break;
         case 'psikolog':
           res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }    
@@ -53,7 +54,7 @@ class WebinarController {
     }
   }
 
-  static async updateWebinar(req, res) {
+  static async updatePaket(req, res) {
     try {
       const { role } = req.user
       switch(role) {
@@ -64,18 +65,19 @@ class WebinarController {
           const opt = {
             new : true
           }
-          await Webinar.findOneAndUpdate({_id : req.params.id}, req.body, opt)
-          .then(webinar => {
-            if(!webinar) {
+          await Paket.findOneAndUpdate({_id : req.params.id}, req.body, opt)
+          .then(paket => {
+            if(!paket) {
               res.sendStatus(404)
             }
             res.status(201).json({
-              message : "webinar updated"
+              message : "Paket Konsultasi updated"
             })
           })
           break;
         case 'psikolog':
           res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }   
@@ -84,7 +86,7 @@ class WebinarController {
     }
   }
 
-  static async deleteWebinar(req, res) {
+  static async deletePaket(req, res) {
     try {
       const { role } = req.user
       switch(role) {
@@ -92,20 +94,21 @@ class WebinarController {
           res.sendStatus(403);
           break;
         case 'admin':
-          const webinar = Webinar.findOneAndDelete({_id : req.params.id})
+          const paket = Paket.findOneAndDelete({_id : req.params.id})
           .then(result => {
-            if (!webinar) {
+            if (!paket) {
               res.status(404).json({
-                message : "webinar not found",
+                message : "Paket Konsultasi not found",
               })
             }
             res.status(201).json({
-              message : "webinar deleted",
+              message : "Paket Konsultasi deleted",
             })
           })
           break;
         case 'psikolog':
           res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }    
@@ -116,4 +119,4 @@ class WebinarController {
   }
 }
 
-module.exports = WebinarController
+module.exports = PaketController
