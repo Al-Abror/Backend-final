@@ -43,6 +43,9 @@ class KategoriController {
             })
           })
           break;
+        case 'psikolog':
+          res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }    
@@ -72,6 +75,9 @@ class KategoriController {
             })
           })
           break;
+        case 'psikolog':
+          res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }   
@@ -99,6 +105,9 @@ class KategoriController {
               message : "kategori deleted",
             })
           })
+          break;
+        case 'psikolog':
+          res.sendStatus(403);
           break;
         default:
           res.sendStatus(404)

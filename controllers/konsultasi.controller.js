@@ -1,50 +1,51 @@
-const { Webinar } = require('../models')
+const { Konsultasi } = require('../models')
 
-class WebinarController {
+class KonsultasiController {
 
-  static async getWebinar(req, res) {
+  static async getKonsultasi(req, res) {
     try {
-      const webinarData = await Webinar.find()
-      res.status(200).json(webinarData)
+      const KonsultasiData = await Konsultasi.find()
+      res.status(200).json(KonsultasiData)
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
     }
   }
 
-  static async getWebinarById(req, res) {
+  static async getKonsultasiById(req, res) {
     try {
-      await Webinar.findOne({_id : req.params.id})
-      .then(webinar => {
-        if(!webinar) {
+      await Konsultasi.findOne({_id : req.params.id})
+      .then(konsultasi => {
+        if(!konsultasi) {
           res.sendStatus(404)
         }
-        res.status(200).json(webinar)
+        res.status(200).json(konsultasi)
       })
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
     }
   }
 
-  static async postWebinar(req, res) { 
+  static async postKonsultasi(req, res) { 
     try {
       const { role } = req.user
       switch(role) {
-        case 'user':
-          res.sendStatus(403);
-          break;
-        case 'admin':
-          const webinarData = await req.body;
-          const newWebinar = new Webinar(webinarData)
-          await newWebinar.save()
+        case 'user': // ??
+          const KonsultasiData = await req.body;
+          const newKonsultasi = new Konsultasi(KonsultasiData)
+          await newKonsultasi.save()
           .then(result => {
             res.status(201).json({
-              message : "webinar added",
+              message : "Jadwal Konsultasi added",
               result
             })
           })
           break;
+        case 'admin':
+          res.sendStatus(403);
+          break;
         case 'psikolog':
           res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }    
@@ -53,7 +54,7 @@ class WebinarController {
     }
   }
 
-  static async updateWebinar(req, res) {
+  static async updateKonsultasi(req, res) {
     try {
       const { role } = req.user
       switch(role) {
@@ -64,18 +65,19 @@ class WebinarController {
           const opt = {
             new : true
           }
-          await Webinar.findOneAndUpdate({_id : req.params.id}, req.body, opt)
-          .then(webinar => {
-            if(!webinar) {
+          await Konsultasi.findOneAndUpdate({_id : req.params.id}, req.body, opt)
+          .then(konsultasi => {
+            if(!konsultasi) {
               res.sendStatus(404)
             }
             res.status(201).json({
-              message : "webinar updated"
+              message : "Jadwal Konsultasi updated"
             })
           })
           break;
         case 'psikolog':
           res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }   
@@ -84,7 +86,7 @@ class WebinarController {
     }
   }
 
-  static async deleteWebinar(req, res) {
+  static async deleteKonsultasi(req, res) {
     try {
       const { role } = req.user
       switch(role) {
@@ -92,20 +94,21 @@ class WebinarController {
           res.sendStatus(403);
           break;
         case 'admin':
-          const webinar = Webinar.findOneAndDelete({_id : req.params.id})
+          const konsultasi = Konsultasi.findOneAndDelete({_id : req.params.id})
           .then(result => {
-            if (!webinar) {
+            if (!konsultasi) {
               res.status(404).json({
-                message : "webinar not found",
+                message : "Jadwal Konsultasi not found",
               })
             }
             res.status(201).json({
-              message : "webinar deleted",
+              message : "Jadwal Konsultasi deleted",
             })
           })
           break;
         case 'psikolog':
           res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }    
@@ -116,4 +119,4 @@ class WebinarController {
   }
 }
 
-module.exports = WebinarController
+module.exports = KonsultasiController
