@@ -38,8 +38,10 @@ class AuthController {
                 });
               }
               const token = jwt.sign({email: user.email, role: user.role}, accessTokenSecret)
+              const role = user.role
               res.status(200).json({
-                token: token
+                token: token,
+                role: role
               });
             }
           )   
