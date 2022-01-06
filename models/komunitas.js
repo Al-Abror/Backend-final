@@ -19,11 +19,11 @@ const komunitasSchema = new mongoose.Schema({
     dokumentasi : [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'dokumentasi'
+            ref: 'documentations'
         }
     ]
 }, timestamps);
 
 
-const komunitasModel = mongoose.model("Komunitas", komunitasSchema)
+const komunitasModel = mongoose.model("communities", komunitasSchema)
 module.exports = komunitasModel

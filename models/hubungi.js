@@ -18,5 +18,5 @@ const hubungiSchema = new mongoose.Schema({
     }
 }, timestamps)
 
-const HubungiModel = mongoose.model('Hubungi', hubungiSchema)
+const HubungiModel = mongoose.model('contacts', hubungiSchema)
 module.exports = HubungiModel

@@ -19,5 +19,5 @@ const webinarSchema = new mongoose.Schema({
 }, timestamps);
 
 
-const webinarModel = mongoose.model("Webinar", webinarSchema)
+const webinarModel = mongoose.model("webinars", webinarSchema)
 module.exports = webinarModel

@@ -23,5 +23,5 @@ const timkamiSchema = new mongoose.Schema({
 }, timestamps);
 
 
-const timkamiModel = mongoose.model("timkami", timkamiSchema)
+const timkamiModel = mongoose.model("ourteams", timkamiSchema)
 module.exports = timkamiModel

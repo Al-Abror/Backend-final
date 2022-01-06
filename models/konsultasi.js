@@ -5,14 +5,16 @@ const timestamps = {
     timestamps : true
 }
 const konsultasiSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, 'nama wajib diisi']
-    },
+    name: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
+        }
+    ],
     psikolog : [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'psikolog'
+            ref: 'psychologists'
         }
     ],
     gender: {
@@ -37,5 +39,5 @@ const konsultasiSchema = new mongoose.Schema({
     }
 }, timestamps)
 
-const KonsultasiModel = mongoose.model('Konsultasi', konsultasiSchema)
+const KonsultasiModel = mongoose.model('consultations', konsultasiSchema)
 module.exports = KonsultasiModel

@@ -20,13 +20,13 @@ const psikologSchema = new mongoose.Schema({
     testimoni: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'TestimoniPsikolog'
+            ref: 'testimonials'
         }
     ],
     kategori : [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Kategori'
+            ref: 'categories'
         }
     ],
     gambar: {
@@ -35,5 +35,5 @@ const psikologSchema = new mongoose.Schema({
     }
 }, timestamps)
 
-const PsikologModel = mongoose.model('Psikolog', psikologSchema)
+const PsikologModel = mongoose.model('psychologists', psikologSchema)
 module.exports = PsikologModel

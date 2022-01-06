@@ -19,5 +19,5 @@ const artikelSchema = new mongoose.Schema({
 }, timestamps);
 
 
-const artikelModel = mongoose.model("Artikel", artikelSchema)
+const artikelModel = mongoose.model("articles", artikelSchema)
 module.exports = artikelModel

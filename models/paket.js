@@ -18,5 +18,5 @@ const paketSchema = new mongoose.Schema({
     },
 }, timestamps)
 
-const PaketModel = mongoose.model('Paket', paketSchema)
+const PaketModel = mongoose.model('packages', paketSchema)
 module.exports = PaketModel

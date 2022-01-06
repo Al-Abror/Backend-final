@@ -53,11 +53,11 @@ const userSchema = new mongoose.Schema({
     jadwalKonsultasi: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'konsultasi'
+            ref: 'consultations'
         }
     ]
 }, timestamps)
 
-const UserModel = mongoose.model('User', userSchema)
+const UserModel = mongoose.model('users', userSchema)
 
 module.exports = UserModel

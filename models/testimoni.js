@@ -23,5 +23,5 @@ const testimoniSchema = new mongoose.Schema({
 }, timestamps);
 
 
-const testimoniModel = mongoose.model("Testimoni", testimoniSchema)
+const testimoniModel = mongoose.model("experiences", testimoniSchema)
 module.exports = testimoniModel
