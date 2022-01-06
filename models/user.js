@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema({
     jadwalKonsultasi: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'consultations'
+            ref: 'konsultasis'
         }
     ]
 }, timestamps)
