@@ -7,13 +7,14 @@ const timestamps = {
 const hubungiSchema = new mongoose.Schema({
     email: {
         type: String,
-        required: true,
-        validate : emailValidator,
-        match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        required: [true, 'email wajib diisi'],
+        unique: true,
+        validate : [emailValidator, 'email tidak valid'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'email tidak valid']
     },
     keluhan: {
         type: String,
-        required: true
+        required: [true, 'keluhan wajib diisi']
     }
 }, timestamps)
 

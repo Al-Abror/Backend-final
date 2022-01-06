@@ -7,26 +7,33 @@ const timestamps = {
 const konsultasiSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true, 'nama wajib diisi']
     },
+    psikolog : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'psikolog'
+        }
+    ],
     gender: {
         type: String,
-        enum: ["male", "female"],
+        enum: ["laki-laki", "perempuan"],
         lowercase : true,
-        required: [true, 'gender is required']
+        required: [true, 'jenis kelamin wajib diisi']
     },
     date: {
         type: Date,
-        required: true
+        required: [true, 'tanggal wajib diisi']
     },
     no_hp: {
         type: String,
         required : [true, 'phone number is required'],
-        validate : phoneValidator,
-        match : /\+?([ -]?\d+)+|\(\d+\)([ -]\d+)/
+        validate : [phoneValidator, 'nomor telepon tidak valid'],
+        match : [/\+?([ -]?\d+)+|\(\d+\)([ -]\d+)/, 'nomor telepon tidak valid']
     },
     keluhan: {
-        type: String
+        type: String,
+        required: [true, 'keluhan wajib diisi']
     }
 }, timestamps)
 

@@ -3,28 +3,35 @@ const mongoose = require("mongoose")
 const timestamps = {
     timestamps : true
 }
+
 const psikologSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true, 'nama wajib diisi']
     },
     spesialis: {
         type: String,
-        required : true
+        required : [true, 'spesialis wajib diisi']
     },
     deskripsi: {
         type: String,
-        required : true
+        required : [true, 'deskripsi wajib diisi']
     },
     testimoni: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'testiPsikolog'
+            ref: 'TestimoniPsikolog'
+        }
+    ],
+    kategori : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Kategori'
         }
     ],
     gambar: {
         type: String,
-        required : true
+        default: "https://thumbs.dreamstime.com/z/no-image-vector-isolated-white-background-no-image-vector-illustration-isolated-156298619.jpg"
     }
 }, timestamps)
 

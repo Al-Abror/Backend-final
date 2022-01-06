@@ -6,19 +6,19 @@ const timestamps = {
 const timkamiSchema = new mongoose.Schema({
     nama: {
         type: String,
-        required: true,
+        required: [true, 'nama wajib diisi']
     },
     deskripsi: {
         type: String,
-        required: true,
+        required: [true, 'deskripsi wajib diisi']
     },
     posisi: {
         type: String,
-        required: true,
+        required: [true, 'posisi wajib disi']
     },
     gambar: {
         type: String,
-        required: true,
+        required: [true, 'gambar wajib diisi']
     }
 }, timestamps);
 
