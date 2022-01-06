@@ -10,25 +10,25 @@ const timestamps = {
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'name is required']
+        required: [true, 'nama wajib diisi']
     },
     email: {
         type: String,
-        required: [true, 'email is required'],
+        required: [true, 'email wajib diisi'],
         unique: true,
-        validate : [emailValidator, 'email is not valid'],
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'email is not valid']
+        validate : [emailValidator, 'email tidak valid'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'email tidak valid']
     },
     no_hp: {
         type: String,
-        required : [true, 'phone number is required'],
+        required : [true, 'nomor telepon wajib diisi'],
         unique : true,
         validate : phoneValidator,
         match : /\+?([ -]?\d+)+|\(\d+\)([ -]\d+)/
     },
     password: {
         type: String,
-        required: [true, 'password is required'],
+        required: [true, 'password wajib diisi'],
         validate : [passwordValidator, msg],
         match : [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, msg]
     },
@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ["male", "female"],
         lowercase : true,
-        required: [true, 'gender is required']
+        required: [true, 'jenis kelamin wajib diisi']
     },
     role: {
         type: String,
@@ -46,9 +46,9 @@ const userSchema = new mongoose.Schema({
     },
     member: {
         type: String,
-        enum: ['member', 'not member'],
+        enum: ["paket 1", "not member", "paket 2", "paket 3", "paket trial"],
         lowercase : true,
-        required: true
+        required: [true, 'member wajib diisi']
     },
     jadwalKonsultasi: [
         {
