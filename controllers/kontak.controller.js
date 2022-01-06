@@ -12,6 +12,9 @@ class KontakController {
         case 'admin' :
           res.sendStatus(403)
           break;
+        case 'psikolog':
+          res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }
@@ -30,6 +33,9 @@ class KontakController {
           break;
         case 'admin':
           res.sendStatus(403)
+          break;
+        case 'psikolog':
+          res.sendStatus(403);
           break;
         default :
           res.sendStatus(404)
@@ -57,11 +63,14 @@ class KontakController {
         case 'admin':
           res.sendStatus(403)
           break;
+        case 'psikolog':
+          res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }
     } catch (error) {
-      res.status(500).json({msg : "internal server error"})
+      res.status(500).json({msg : error.message})
     }
   }
 }

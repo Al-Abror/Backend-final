@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
 const { phoneValidator } = require('./validators')
 
-
 const timestamps = {
     timestamps : true
 }

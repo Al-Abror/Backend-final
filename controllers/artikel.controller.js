@@ -44,11 +44,14 @@ class ArtikelController {
             })
           })
           break;
+        case 'psikolog':
+          res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }    
     } catch (error) {
-      res.status(500).json({msg : "internal server error"})
+      res.status(500).json({msg : error.message})
     }
   }
 
@@ -73,11 +76,14 @@ class ArtikelController {
             })
           })
           break;
+        case 'psikolog':
+          res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }   
     } catch (error) {
-      res.status(500).json({msg : "internal server error"})
+      res.status(500).json({msg : error.message})
     }
   }
 
@@ -100,6 +106,9 @@ class ArtikelController {
               message : "artikel deleted",
             })
           })
+          break;
+        case 'psikolog':
+          res.sendStatus(403);
           break;
         default:
           res.sendStatus(404)

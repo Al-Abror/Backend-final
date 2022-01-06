@@ -49,7 +49,7 @@ class TimController {
           res.sendStatus(404)
       }    
     } catch (error) {
-      res.status(500).json({msg : "internal server error"})
+      res.status(500).json({msg : error.message})
     }
   }
 
@@ -80,7 +80,7 @@ class TimController {
           res.sendStatus(404)
       }   
     } catch (error) {
-      res.status(500).json({msg : "internal server error"})
+      res.status(500).json({msg : error.message})
     }
   }
 
