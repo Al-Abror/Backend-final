@@ -19,11 +19,11 @@ const testiPsikologSchema = new mongoose.Schema({
     psikolog : [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'psychologists'
+            ref: 'psikologs'
         }
     ]
 }, timestamps);
 
 
-const testiPsikologModel = mongoose.model("testimonials", testiPsikologSchema)
+const testiPsikologModel = mongoose.model("testimonipsikolog", testiPsikologSchema)
 module.exports = testiPsikologModel

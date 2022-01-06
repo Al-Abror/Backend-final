@@ -14,7 +14,7 @@ const konsultasiSchema = new mongoose.Schema({
     psikolog : [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'psychologists'
+            ref: 'psikologs'
         }
     ],
     gender: {
@@ -39,5 +39,5 @@ const konsultasiSchema = new mongoose.Schema({
     }
 }, timestamps)
 
-const KonsultasiModel = mongoose.model('consultations', konsultasiSchema)
+const KonsultasiModel = mongoose.model('konsultasi', konsultasiSchema)
 module.exports = KonsultasiModel

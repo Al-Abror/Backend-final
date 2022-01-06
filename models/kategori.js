@@ -18,5 +18,5 @@ const kategoriSchema = new mongoose.Schema({
     }
 }, timestamps)
 
-const KategoriModel = mongoose.model('categories', kategoriSchema)
+const KategoriModel = mongoose.model('kategori', kategoriSchema)
 module.exports = KategoriModel
