@@ -5,13 +5,15 @@ const salt = bcrypt.genSaltSync(10);
 class UserController {
   static async registerUser(req, res) {
     try {
-      const {name, email, password, gender, no_hp, role, member, jadwalKonsultasi} = await req.body;
+      const {name, email, email_Ortu, password, gender, no_hp, birthdate, role, member, jadwalKonsultasi} = await req.body;
       const hashpw = bcrypt.hashSync(password, salt)
       const newUser = new User({
         name: name,
         email: email,
+        email_Ortu: email_Ortu,
         password : hashpw,
         gender: gender,
+        birthdate: birthdate,
         no_hp: no_hp,
         role : role,
         member : member,
@@ -38,12 +40,14 @@ class UserController {
           const opt = {
             new : true
           }
-          const {name, email, gender, no_hp, role, member} = await req.body;
+          const {name, email, email_Ortu, gender, no_hp, birthdate, role, member} = await req.body;
           const newUser = {
             name: name,
             email: email,
+            email_Ortu: email_Ortu,
             gender: gender,
             no_hp: no_hp,
+            birthdate: birthdate,
             role : role,
             member : member
           }

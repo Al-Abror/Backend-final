@@ -19,6 +19,13 @@ const userSchema = new mongoose.Schema({
         validate : [emailValidator, 'email tidak valid'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'email tidak valid']
     },
+    email_Ortu: {
+        type: String,
+        required: [true, 'email orang tua wajib diisi'],
+        unique: false,
+        validate : [emailValidator, 'email orang tua tidak valid'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'email tidak valid']
+    },
     no_hp: {
         type: String,
         required : [true, 'nomor telepon wajib diisi'],
@@ -37,6 +44,10 @@ const userSchema = new mongoose.Schema({
         enum: ["male", "female"],
         lowercase : true,
         required: [true, 'jenis kelamin wajib diisi']
+    },
+    birthdate: {
+        type: Date,
+        required: true
     },
     role: {
         type: String,
