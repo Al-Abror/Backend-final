@@ -6,22 +6,22 @@ const timestamps = {
 const testimoniSchema = new mongoose.Schema({
     judul: {
         type: String,
-        required: true,
+        required: [true, 'judul wajib diisi']
     },
     deskripsi: {
         type: String,
-        required: true,
+        required: [true, 'deskripsi wajib diisi']
     },
     video: {
         type: String,
-        required: true,
+        default: "https://thumbs.dreamstime.com/z/no-image-vector-isolated-white-background-no-image-vector-illustration-isolated-156298619.jpg"
     },
     problema: {
         type: String,
-        required: true,
+        required: [true, 'problema wajib diisi']
     }
 }, timestamps);
 
 
-const testimoniModel = mongoose.model("Testimoni", testimoniSchema)
+const testimoniModel = mongoose.model("testimoni", testimoniSchema)
 module.exports = testimoniModel

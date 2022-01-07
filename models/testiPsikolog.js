@@ -5,22 +5,25 @@ const timestamps = {
 }
 const testiPsikologSchema = new mongoose.Schema({
     patientname: {
-        type: String
+        type: String,
+        default : 'anonim'
     },
     deskripsi: {
         type: String,
-        required: true,
+        required: [true, 'deskripsi wajib diisi']
     },
     gambar: {
         type: String,
-        required: true,
+        default: "https://thumbs.dreamstime.com/z/no-image-vector-isolated-white-background-no-image-vector-illustration-isolated-156298619.jpg"
     },
-    problema: {
-        type: String,
-        required: true,
-    }
+    psikolog : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'psikologs'
+        }
+    ]
 }, timestamps);
 
 
-const testiPsikologModel = mongoose.model("TestimoniPsikolog", testiPsikologSchema)
+const testiPsikologModel = mongoose.model("testimonipsikolog", testiPsikologSchema)
 module.exports = testiPsikologModel

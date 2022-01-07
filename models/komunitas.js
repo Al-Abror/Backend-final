@@ -6,30 +6,24 @@ const timestamps = {
 const komunitasSchema = new mongoose.Schema({
     judul: {
         type: String,
-        required: true,
+        required: [true, 'judul wajib diisi']
     },
     deskripsi: {
         type: String,
-        required: true,
+        required: [true, 'deskripsi wajib diisi']
     },
     gambar: {
         type: String,
-        required: true,
+        default: "https://thumbs.dreamstime.com/z/no-image-vector-isolated-white-background-no-image-vector-illustration-isolated-156298619.jpg"
     },
-    judul_dokumentasi: {
-        type: String,
-        required: true,
-    },
-    desk_dokumentasi: {
-        type: String,
-        required: true,
-    },
-    gambar_dokumentasi: {
-        type: String,
-        required: true,
-    },
+    dokumentasi : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'dokumentasis'
+        }
+    ]
 }, timestamps);
 
 
-const komunitasModel = mongoose.model("Komunitas", komunitasSchema)
+const komunitasModel = mongoose.model("komunitas", komunitasSchema)
 module.exports = komunitasModel

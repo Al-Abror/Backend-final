@@ -1,35 +1,43 @@
 const mongoose = require("mongoose")
 const { phoneValidator } = require('./validators')
 
-
 const timestamps = {
     timestamps : true
 }
 const konsultasiSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
+    name: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
+        }
+    ],
+    psikolog : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'psikologs'
+        }
+    ],
     gender: {
         type: String,
-        enum: ["male", "female"],
+        enum: ["laki-laki", "perempuan"],
         lowercase : true,
-        required: [true, 'gender is required']
+        required: [true, 'jenis kelamin wajib diisi']
     },
     date: {
         type: Date,
-        required: true
+        required: [true, 'tanggal wajib diisi']
     },
     no_hp: {
         type: String,
         required : [true, 'phone number is required'],
-        validate : phoneValidator,
-        match : /\+?([ -]?\d+)+|\(\d+\)([ -]\d+)/
+        validate : [phoneValidator, 'nomor telepon tidak valid'],
+        match : [/\+?([ -]?\d+)+|\(\d+\)([ -]\d+)/, 'nomor telepon tidak valid']
     },
     keluhan: {
-        type: String
+        type: String,
+        required: [true, 'keluhan wajib diisi']
     }
 }, timestamps)
 
-const KonsultasiModel = mongoose.model('Konsultasi', konsultasiSchema)
+const KonsultasiModel = mongoose.model('konsultasi', konsultasiSchema)
 module.exports = KonsultasiModel

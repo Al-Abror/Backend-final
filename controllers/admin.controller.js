@@ -15,6 +15,9 @@ class AdminController {
           const userData = await User.find()
           res.status(200).json(userData)
           break;
+        case 'psikolog':
+          res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }
@@ -39,6 +42,9 @@ class AdminController {
             res.status(200).json(user)
           })
           break;
+        case 'psikolog':
+          res.sendStatus(403);
+          break;
         default:
           res.sendStatus(404)
       }
@@ -55,7 +61,7 @@ class AdminController {
           res.sendStatus(403);
           break;
         case 'admin':
-          const {name, email, password, gender, no_hp, role} = await req.body;
+          const {name, email, password, gender, no_hp, role, member} = await req.body;
           const hashpw = bcrypt.hashSync(password, salt)
           const newUser = new User({
             name: name,
@@ -63,7 +69,8 @@ class AdminController {
             password : hashpw,
             gender: gender,
             no_hp: no_hp,
-            role : role
+            role : role,
+            member : member
           })
           await newUser.save()
           .then(result => {
@@ -72,6 +79,9 @@ class AdminController {
               result
             })
           })
+          break;
+        case 'psikolog':
+          res.sendStatus(403);
           break;
         default:
           res.sendStatus(404)
@@ -92,15 +102,14 @@ class AdminController {
           const opt = {
             new : true
           }
-          const {name, email, password, gender, no_hp, role} = await req.body;
-          const hashpw = bcrypt.hashSync(password, salt)
+          const {name, email, gender, no_hp, role, member} = await req.body;
           const newUser = {
             name: name,
             email: email,
-            password : hashpw,
             gender: gender,
             no_hp: no_hp,
-            role : role
+            role : role,
+            member : member
           }
           await User.findOneAndUpdate({_id : req.params.id}, newUser, opt)
           .then(user => {
@@ -111,6 +120,46 @@ class AdminController {
               message : "user updated"
             })
           })
+          break;
+        case 'psikolog':
+          res.sendStatus(403);
+          break;
+        default:
+          res.sendStatus(404)
+      }      
+    } catch (error) {
+      res.status(500).json({msg : error.message})
+    }
+  }
+
+  static async updatePassword(req, res) {
+    try {
+      const {role} = req.user
+      switch(role) {
+        case 'user':
+          res.sendStatus(403);
+          break;
+        case 'admin':
+          const opt = {
+            new : true
+          }
+          const { password } = await req.body;
+          const hashpw = bcrypt.hashSync(password, salt)
+          const newUser = {
+            password : hashpw,
+          }
+          await User.findOneAndUpdate({_id : req.params.id}, newUser, opt)
+          .then(user => {
+            if (!user) {
+              res.sendStatus(404)
+            }
+            res.status(201).json({
+              message : "user updated"
+          })
+        })
+          break;
+        case 'psikolog':
+          res.sendStatus(403);
           break;
         default:
           res.sendStatus(404)
@@ -139,6 +188,9 @@ class AdminController {
               message : "user deleted",
             })
           })
+          break;
+        case 'psikolog':
+          res.sendStatus(403);
           break;
         default:
           res.sendStatus(404)

@@ -6,17 +6,17 @@ const timestamps = {
 const paketSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true, 'nama paket wajib diisi']
     },
     deskripsi: {
         type: String,
-        required : true
+        required : [true, 'deskripsi paket wajib diisi']
     },
     harga: {
         type: String,
-        required : true
+        required : [true, 'harga wajib diisi']
     },
 }, timestamps)
 
-const PaketModel = mongoose.model('Paket', paketSchema)
+const PaketModel = mongoose.model('paket', paketSchema)
 module.exports = PaketModel

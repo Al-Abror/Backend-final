@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 const timestamps = {
     timestamps : true
 }
-const artikelSchema = new mongoose.Schema({
+
+const dokumentasiSchema = new mongoose.Schema({
     judul: {
         type: String,
         required: [true, 'judul wajib diisi']
@@ -15,9 +16,15 @@ const artikelSchema = new mongoose.Schema({
     gambar: {
         type: String,
         default: "https://thumbs.dreamstime.com/z/no-image-vector-isolated-white-background-no-image-vector-illustration-isolated-156298619.jpg"
-    }
+    },
+    komunitas : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'komunitas'
+        }
+    ]
 }, timestamps);
 
 
-const artikelModel = mongoose.model("Artikel", artikelSchema)
-module.exports = artikelModel
+const dokumentasiModel = mongoose.model("dokumentasi", dokumentasiSchema)
+module.exports = dokumentasiModel
