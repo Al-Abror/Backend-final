@@ -55,6 +55,10 @@ const userSchema = new mongoose.Schema({
         lowercase : true,
         required: true
     },
+    profpic: {
+        type: String,
+        default: "https://www.pinclipart.com/picdir/middle/181-1814767_person-svg-png-icon-free-download-profile-icon.png"
+    },
     member: {
         type: String,
         enum: ["paket 1", "not member", "paket 2", "paket 3", "paket trial"],
