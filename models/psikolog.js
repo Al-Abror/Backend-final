@@ -20,7 +20,7 @@ const psikologSchema = new mongoose.Schema({
     testimoni: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'testimonis'
+            ref: 'testiPsikolog'
         }
     ],
     kategori : [
