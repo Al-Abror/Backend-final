@@ -20,13 +20,13 @@ const psikologSchema = new mongoose.Schema({
     testimoni: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'testimonipsikologs'
+            ref: 'testimonipsikolog'
         }
     ],
     kategori : [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'kategoris'
+            ref: 'kategori'
         }
     ],
     gambar: {

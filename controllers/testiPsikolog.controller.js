@@ -4,7 +4,7 @@ class TestiPsikologController {
 
   static async getTestiPsikolog(req, res) {
     try {
-      const TestiPsikologData = await TestiPsikolog.find()
+      const TestiPsikologData = await TestiPsikolog.find().populate("psikolog")
       res.status(200).json(TestiPsikologData)
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
@@ -13,7 +13,7 @@ class TestiPsikologController {
 
   static async getTestiPsikologById(req, res) {
     try {
-      await TestiPsikolog.findOne({_id : req.params.id})
+      await TestiPsikolog.findOne({_id : req.params.id}).populate("psikolog")
       .then(testiPsikolog => {
         if(!testiPsikolog) {
           res.sendStatus(404)
