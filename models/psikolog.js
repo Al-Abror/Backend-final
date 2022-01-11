@@ -31,7 +31,7 @@ const psikologSchema = new mongoose.Schema({
     ],
     gambar: {
         type: String,
-        default: "https://thumbs.dreamstime.com/z/no-image-vector-isolated-white-background-no-image-vector-illustration-isolated-156298619.jpg"
+        default: "https://www.pinclipart.com/picdir/middle/181-1814767_person-svg-png-icon-free-download-profile-icon.png"
     }
 }, timestamps)
 
