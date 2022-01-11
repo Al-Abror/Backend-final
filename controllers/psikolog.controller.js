@@ -4,16 +4,17 @@ class PsikologController {
 
   static async getPsikolog(req, res) {
     try {
-      const psikologData = await Psikolog.find().populate("testimonis")
+      const psikologData = await Psikolog.find().populate("testimoni")
       res.status(200).json(psikologData)
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
+      console.log(error);
     }
   }
 
   static async getPsikologById(req, res) {
     try {
-      await Psikolog.findOne({_id : req.params.id}).populate("testimonis")
+      await Psikolog.findOne({_id : req.params.id}).populate("testimoni")
       .then(psikolog => {
         if(!psikolog) {
           res.sendStatus(404)

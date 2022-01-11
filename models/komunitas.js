@@ -19,7 +19,7 @@ const komunitasSchema = new mongoose.Schema({
     dokumentasi : [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'dokumentasis'
+            ref: 'dokumentasi'
         }
     ]
 }, timestamps);

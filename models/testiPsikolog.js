@@ -19,7 +19,7 @@ const testiPsikologSchema = new mongoose.Schema({
     psikolog : [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'psikologs'
+            ref: 'psikolog'
         }
     ]
 }, timestamps);

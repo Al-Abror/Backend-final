@@ -4,7 +4,7 @@ class KonsultasiController {
 
   static async getKonsultasi(req, res) {
     try {
-      const KonsultasiData = await Konsultasi.find()
+      const KonsultasiData = await Konsultasi.find().populate("list-users")
       res.status(200).json(KonsultasiData)
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
@@ -13,7 +13,7 @@ class KonsultasiController {
 
   static async getKonsultasiById(req, res) {
     try {
-      await Konsultasi.findOne({_id : req.params.id})
+      await Konsultasi.findOne({_id : req.params.id}).populate("list-users")
       .then(konsultasi => {
         if(!konsultasi) {
           res.sendStatus(404)
