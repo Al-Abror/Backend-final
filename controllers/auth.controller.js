@@ -40,10 +40,28 @@ class AuthController {
               const token = jwt.sign({email: user.email, role: user.role}, accessTokenSecret)
               const id = user.id
               const role = user.role
+              const name = user.name
+              const email = user.email
+              const email_Ortu = user.email_Ortu
+              const gender = user.gender
+              const no_hp = user.no_hp
+              const birthdate = user.birthdate
+              const profpic = user.profpic
+              const member = user.member
+              const jadwalKonsultasi = user.jadwalKonsultasi
               res.status(200).json({
                 token: token,
                 role: role,
-                id: id
+                id: id,
+                name: name,
+                email: email,
+                email_Ortu: email_Ortu,
+                gender: gender,
+                no_hp: no_hp,
+                birthdate: birthdate,
+                profpic: profpic,
+                member: member,
+                jadwalKonsultasi: jadwalKonsultasi
               });
             }
           )   

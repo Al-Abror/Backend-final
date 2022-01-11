@@ -40,7 +40,7 @@ class UserController {
           const opt = {
             new : true
           }
-          const {name, email, email_Ortu, gender, no_hp, birthdate, role, member} = await req.body;
+          const {name, email, email_Ortu, gender, no_hp, birthdate, profpic, role, member} = await req.body;
           const newUser = {
             name: name,
             email: email,
@@ -48,6 +48,7 @@ class UserController {
             gender: gender,
             no_hp: no_hp,
             birthdate: birthdate,
+            profpic: profpic,
             role : role,
             member : member
           }
