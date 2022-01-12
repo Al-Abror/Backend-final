@@ -70,6 +70,12 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'konsultasis'
         }
+    ],
+    hasilDeteksi: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'deteksis'
+        }
     ]
 }, timestamps)
 
