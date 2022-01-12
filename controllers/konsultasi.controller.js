@@ -4,16 +4,26 @@ class KonsultasiController {
 
   static async getKonsultasi(req, res) {
     try {
-      const KonsultasiData = await Konsultasi.find().populate("list-users")
+      const KonsultasiData = await Konsultasi.find()
+      .populate(
+        {
+        path: 'name',
+        select : 'jadwalKonsultasi hasilDeteksi name email no_hp gender member _id'
+        })
+      .populate({
+        path: 'psikolog',
+        select : '_id name email no_hp gender jadwalKonsultasi'
+      })
       res.status(200).json(KonsultasiData)
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
+      console.log(error);
     }
   }
 
   static async getKonsultasiById(req, res) {
     try {
-      await Konsultasi.findOne({_id : req.params.id}).populate("list-users")
+      await Konsultasi.findOne({_id : req.params.id}).populate('name psikolog')
       .then(konsultasi => {
         if(!konsultasi) {
           res.sendStatus(404)
