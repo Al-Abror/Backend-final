@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const { phoneValidator } = require('./validators')
+const { phoneValidator, emailValidator } = require('./validators')
 
 const timestamps = {
     timestamps : true
@@ -32,6 +32,20 @@ const konsultasiSchema = new mongoose.Schema({
         required : [true, 'phone number is required'],
         validate : [phoneValidator, 'nomor telepon tidak valid'],
         match : [/\+?([ -]?\d+)+|\(\d+\)([ -]\d+)/, 'nomor telepon tidak valid']
+    },
+    email: {
+        type: String,
+        required: [true, 'email wajib diisi'],
+        unique: true,
+        validate : [emailValidator, 'email tidak valid'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'email tidak valid']
+    },
+    email_Ortu: {
+        type: String,
+        required: [true, 'email orang tua wajib diisi'],
+        unique: false,
+        validate : [emailValidator, 'email orang tua tidak valid'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'email tidak valid']
     },
     keluhan: {
         type: String,
