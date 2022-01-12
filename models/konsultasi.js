@@ -36,7 +36,7 @@ const konsultasiSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, 'email wajib diisi'],
-        unique: true,
+        unique: false,
         validate : [emailValidator, 'email tidak valid'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'email tidak valid']
     },
