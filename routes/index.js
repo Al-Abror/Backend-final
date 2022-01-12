@@ -12,6 +12,7 @@ const webinarRouter = require('./webinar.route')
 const konsultasiRouter = require('./konsultasi.route')
 const paketRouter = require('./paket.route')
 const testiPsikologRouter = require('./testiPsikolog.route')
+const dokumentasiRouter = require('./dokumentasi.route')
 
 router.get("/", (req, res) => {
     res.status(200).send('Hello, welcome to cure.it API')
@@ -28,6 +29,7 @@ router.use('/webinar', webinarRouter)
 router.use('/konsultasi', konsultasiRouter)
 router.use('/paket', paketRouter)
 router.use('/testimoni', testiPsikologRouter)
+router.use('/dokumentasi', dokumentasiRouter)
 
 router.use(adminRouter)
 router.use(userRouter)

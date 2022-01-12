@@ -1,31 +1,31 @@
-const { Komunitas } = require('../models')
+const { Dokumentasi } = require('../models')
 
-class KomunitasController {
+class DokumentasiController {
 
-  static async getKomunitas(req, res) {
+  static async getDokumentasi(req, res) {
     try {
-      const komunitasData = await Komunitas.find().populate("dokumentasi")
-      res.status(200).json(komunitasData)
+      const dokumentasiData = await Dokumentasi.find().populate("komunitas")
+      res.status(200).json(dokumentasiData)
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
     }
   }
 
-  static async getKomunitasById(req, res) {
+  static async getDokumentasiById(req, res) {
     try {
-      await Komunitas.findOne({_id : req.params.id}).populate("dokumentasi")
-      .then(komunitas => {
-        if(!komunitas) {
+      await Dokumentasi.findOne({_id : req.params.id}).populate("komunitas")
+      .then(dokumentasi => {
+        if(!dokumentasi) {
           res.sendStatus(404)
         }
-        res.status(200).json(komunitas)
+        res.status(200).json(dokumentasi)
       })
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
     }
   }
 
-  static async postKomunitas(req, res) { 
+  static async postDokumentasi(req, res) { 
     try {
       const { role } = req.user
       switch(role) {
@@ -33,12 +33,12 @@ class KomunitasController {
           res.sendStatus(403);
           break;
         case 'admin':
-          const komunitasData = await req.body;
-          const newKomunitas = new Komunitas(komunitasData)
-          await newKomunitas.save()
+          const dokumentasiData = await req.body;
+          const newDokumentasi = new Dokumentasi(dokumentasiData)
+          await newDokumentasi.save()
           .then(result => {
             res.status(201).json({
-              message : "komunitas added",
+              message : "dokumentasi added",
               result
             })
           })
@@ -54,7 +54,7 @@ class KomunitasController {
     }
   }
 
-  static async updateKomunitas(req, res) {
+  static async updateDokumentasi(req, res) {
     try {
       const { role } = req.user
       switch(role) {
@@ -65,13 +65,13 @@ class KomunitasController {
           const opt = {
             new : true
           }
-          await Komunitas.findOneAndUpdate({_id : req.params.id}, req.body, opt)
-          .then(komunitas => {
-            if(!komunitas) {
+          await Dokumentasi.findOneAndUpdate({_id : req.params.id}, req.body, opt)
+          .then(dokumentasi => {
+            if(!dokumentasi) {
               res.sendStatus(404)
             }
             res.status(201).json({
-              message : "komunitas updated"
+              message : "dokumentasi updated"
             })
           })
           break;
@@ -86,7 +86,7 @@ class KomunitasController {
     }
   }
 
-  static async deleteKomunitas(req, res) {
+  static async deleteDokumentasi(req, res) {
     try {
       const { role } = req.user
       switch(role) {
@@ -94,15 +94,15 @@ class KomunitasController {
           res.sendStatus(403);
           break;
         case 'admin':
-          const komunitas = Komunitas.findOneAndDelete({_id : req.params.id})
+          const dokumentasi = Dokumentasi.findOneAndDelete({_id : req.params.id})
           .then(result => {
-            if (!komunitas) {
+            if (!dokumentasi) {
               res.status(404).json({
-                message : "komunitas not found",
+                message : "dokumentasi not found",
               })
             }
             res.status(201).json({
-              message : "komunitas deleted",
+              message : "dokumentasi deleted",
             })
           })
           break;
@@ -119,4 +119,4 @@ class KomunitasController {
   }
 }
 
-module.exports = KomunitasController
+module.exports = DokumentasiController
