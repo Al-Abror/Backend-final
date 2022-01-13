@@ -12,4 +12,5 @@ module.exports = {
   Konsultasi: require("./konsultasi"),
   Paket: require("./paket"),
   TestiPsikolog: require("./testiPsikolog"),
+  Deteksi: require("./deteksi"),
 };
