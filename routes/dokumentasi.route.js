@@ -1,13 +1,13 @@
 const router = require('express').Router()
-const { KategoriController, AuthController } = require('../controllers')
+const { DeteksiController, AuthController } = require('../controllers')
 
 // admin only
-router.patch('/edit-dokumentasi/:id', AuthController.authenticationJWT, KategoriController.updateKategori)
-router.delete('/delete-dokumentasi/:id', AuthController.authenticationJWT, KategoriController.deleteKategori)
-router.post('/add-dokumentasi',  AuthController.authenticationJWT, KategoriController.postKategori)
+router.patch('/edit-dokumentasi/:id', AuthController.authenticationJWT, DeteksiController.updateDeteksi)
+router.delete('/delete-dokumentasi/:id', AuthController.authenticationJWT, DeteksiController.deleteDeteksi)
+router.post('/add-dokumentasi',  AuthController.authenticationJWT, DeteksiController.postDeteksi)
 
 // admin, user, and non user
-router.get('/:id', KategoriController.getKategoriById)
-router.get('/', KategoriController.getKategori)
+router.get('/:id', DeteksiController.getDeteksiById)
+router.get('/', DeteksiController.getDeteksi)
 
 module.exports = router
