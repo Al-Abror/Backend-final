@@ -12,6 +12,7 @@ module.exports = {
     WebinarController: require('./webinar.controller'),
     KonsultasiController: require('./konsultasi.controller'),
     PaketController: require('./paket.controller'),
-    TestiPsikologController: require('./testiPsikolog.controller')
-
+    TestiPsikologController: require('./testiPsikolog.controller'),
+    DokumentasiController: require('./dokumentasi.controller'),
+    DeteksiController : require('./deteksi.controller')
 } 
