@@ -2,7 +2,7 @@
 
 ### **Postman Documentation**
 
-https://documenter.getpostman.com/
+https://documenter.getpostman.com/view/18770418/UVXjJFfU
 
 #
 
