@@ -4,7 +4,7 @@ class KomunitasController {
 
   static async getKomunitas(req, res) {
     try {
-      const komunitasData = await Komunitas.find().populate("dokumentasi")
+      const komunitasData = await Komunitas.find()
       res.status(200).json(komunitasData)
     } catch (error) {
       res.status(500).json({msg : "internal server error"})
@@ -13,7 +13,7 @@ class KomunitasController {
 
   static async getKomunitasById(req, res) {
     try {
-      await Komunitas.findOne({_id : req.params.id}).populate("dokumentasi")
+      await Komunitas.findOne({_id : req.params.id})
       .then(komunitas => {
         if(!komunitas) {
           res.sendStatus(404)
