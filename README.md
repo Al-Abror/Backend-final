@@ -19,12 +19,13 @@ Router ini terhubung dengan register di MongoDB. End point ini dapat diakses ole
 {
     "name": "string",
     "email": "string",
+    "email_Ortu": "string"
     "no_hp": "Number",
+    "birthdate": "Date",
     "password": "string",
     "gender": "string",
     "role" : "string",
     "member" : "string",
-
 }
 ```
 
@@ -621,7 +622,7 @@ Request :
 }
 ```
 
-## 7. Komunitas Collection
+## 7. Komunitas Collection <!-- ini gimana -->
 
 | Judul              | Tipe     | Deskripsi                                                                    |
 | ------------------ | -------- | ---------------------------------------------------------------------------- |
@@ -1351,6 +1352,7 @@ Request :
    "deskripsi": "string",
    "gambar": "string",
    "problema": "string"
+   "psikolog": "string"
 }
 ```
 
@@ -1364,6 +1366,7 @@ Request :
         "deskripsi": "string",
         "gambar": "string",
         "problema": "string",
+        "psikolog": "string",
         "_id": "ObjectId",
         "createdAt": "Date",
         "updatedAt": "Date",
@@ -1391,6 +1394,7 @@ Request :
     "deskripsi": "string",
     "gambar": "string",
     "problema": "string",
+    "psikolog": "string",
     "createdAt": "Date",
     "updatedAt": "Date"
 }
@@ -1415,6 +1419,7 @@ Request :
     "deskripsi": "string",
     "gambar": "string",
     "problema": "string",
+    "psikolog": "string",
     "createdAt": "Date",
     "updatedAt": "Date"
 }
@@ -1436,5 +1441,614 @@ Request :
 ```
 {
     "message": "psikolog deleted"
+}
+```
+
+## 12. Konsultasi Collection
+
+| Judul      | Tipe     | Deskripsi                                                                     |
+| ---------- | -------- | ----------------------------------------------------------------------------- |
+| \_id       | ObjectId | ID Konsultasi dibuat secara otomatis oleh MongoDB saat admin menambahkan data |
+| name       | string   | Judul tentang Konsultasi                                                      |
+| psikolog   | string   | Deskripsi Konsultasi                                                          |
+| gender     | string   | gender dari                                                                   |
+| date       | date     | tanggal Konsultasi                                                            |
+| no_hp      | string   | nomor hp Konsultasi                                                           |
+| email      | string   | email pasien                                                                  |
+| email_ortu | string   | email orang tua pasien                                                        |
+| keluhan    | string   | keluhan dari Konsultasi                                                       |
+
+### a. Create Konsultasi
+
+Router ini terhubung dengan Konsultasi collection di mongoDB. Hanya bisa diakses oleh role admin.
+
+Request :
+
+- Method : POST
+- Endpoint : /konsultasi/add-konsultasi
+- Header :
+  - Tipe konten : application/json
+  - Accept: application/json
+  - Authorization: bearer token
+- Body :
+
+```
+{
+   "judul" : "string",
+   "name" : "string",
+   "psikolog" : "string",
+   "gender" : "string",
+   "date" : "date",
+   "no_hp" : "string",
+   "email" : "string",
+   "email_Ortu" : "string",
+   "keluhan" : "string"
+}
+```
+
+- Response :
+
+```
+{
+    "message": "konsultasi added",
+    "result": {
+        "judul" : "string",
+        "name" : "string",
+        "psikolog" : "string",
+        "gender" : "string",
+        "date" : "date",
+        "no_hp" : "string",
+        "email" : "string",
+        "email_Ortu" : "string",
+        "keluhan" : "string"
+        "_id": "ObjectId",
+        "createdAt": "Date",
+        "updatedAt": "Date",
+        "__v": 0
+    }
+}
+```
+
+### b. Read All Konsultasi
+
+Router ini terhubung ke konsultasi collection di MongoDB. role admin,user, dan non user dapat melihat info konsultasi.
+
+Request :
+
+- Method : GET
+- Endpoint : /konsultasi
+- Header :
+  - Accept: application/json
+- Response :
+
+```
+{
+    "_id": "ObjectId",
+    "judul" : "string",
+    "name" : "string",
+    "psikolog" : "string",
+    "gender" : "string",
+    "date" : "date",
+    "no_hp" : "string",
+    "email" : "string",
+    "email_Ortu" : "string",
+    "keluhan" : "string"
+    "createdAt": "Date",
+    "updatedAt": "Date"
+}
+```
+
+### c. Read by Id Konsultasi
+
+Router ini terhubung ke Konsultasi collection di MongoDB. role admin, user dan non user dapat melihat Konsultasi berdasarkan Id.
+
+Request :
+
+- Method : GET
+- Endpoint : /konsultasi/:id
+- Header :
+  - Accept: application/json
+- Response :
+
+```
+{
+    "_id": "ObjectId",
+    "judul" : "string",
+    "name" : "string",
+    "psikolog" : "string",
+    "gender" : "string",
+    "date" : "date",
+    "no_hp" : "string",
+    "email" : "string",
+    "email_Ortu" : "string",
+    "keluhan" : "string"
+    "createdAt": "Date",
+    "updatedAt": "Date"
+}
+```
+
+### d. Update Konsultasi
+
+Router ini terhubung ke konsultasi collection di MongoDB. hanya role admin yang dapat update data konsultasi berdasarkan Id.
+Request :
+
+- Method : PATCH
+- Endpoint : /konsultasi/edit-konsultasi/:id
+- Header :
+  - Content-Type: application/json
+  - Accept: application/json
+  - Authorization: bearer token
+- Body :
+
+```
+{
+    "judul" : "string",
+    "name" : "string",
+    "psikolog" : "string",
+    "gender" : "string",
+    "date" : "date",
+    "no_hp" : "string",
+    "email" : "string",
+    "email_Ortu" : "string",
+    "keluhan" : "string"
+}
+```
+
+- Response :
+
+```
+{
+    "message": "konsultasi updated"
+}
+```
+
+### e. Delete Konsultasi
+
+Router ini terhubung ke konsultasi collection di MongoDB. hanya role admin yang dapat delete data konsultasi berdasarkan Id.
+
+Request :
+
+- Method : DELETE
+- Endpoint : /konsultasi/delete-konsultasi/:id
+- Header :
+  - Accept: application/json
+  - Authorization: bearer token
+- Response :
+
+```
+{
+    "message": "konsultasi deleted"
+}
+```
+
+## 13 Deteksi Collection
+
+| Judul      | Tipe     | Deskripsi                                                                     |
+| ---------- | -------- | ----------------------------------------------------------------------------- |
+| \_id       | ObjectId | ID Deteksi dibuat secara otomatis oleh MongoDB saat admin menambahkan data    |
+| user       | string   | user yang melakukan Deteksi                                                   |
+| question   | string   | pertanyaan-pertanyaan terkait  Deteksi                                        |
+| totalScore | number   | total score                                                                   |
+
+### a. Create Deteksi
+
+Router ini terhubung dengan Deteksi collection di mongoDB. Hanya bisa diakses oleh role admin.
+
+Request :
+
+- Method : POST
+- Endpoint : /deteksi/add-deteksi
+- Header :
+  - Tipe konten : application/json
+  - Accept: application/json
+  - Authorization: bearer token
+- Body :
+
+```
+{
+   "user" " "string",
+   "question" : "string",
+   "totalScore" : "number" 
+}
+```
+
+- Response :
+
+```
+{
+    "message": "konsultasi added",
+    "result": {
+        "user" : "string",
+        "question" : "string",
+        "totalScore" : "number",
+        "_id": "ObjectId",
+        "createdAt": "Date",
+        "updatedAt": "Date",
+        "__v": 0
+    }
+}
+```
+
+### b. Read All Deteksi
+
+Router ini terhubung ke Deteksi collection di MongoDB. role admin,user, dan non user dapat melihat info webinar.
+
+Request :
+
+- Method : GET
+- Endpoint : /deteksi
+- Header :
+  - Accept: application/json
+- Response :
+
+```
+{
+    "_id": "ObjectId",
+    "user" : "string",
+    "question" : "string",
+    "totalScore" : "number",
+    "createdAt": "Date",
+    "updatedAt": "Date"
+}
+```
+
+### c. Read by Id Deteksi
+
+Router ini terhubung ke Deteksi collection di MongoDB. role admin, user dan non user dapat melihat webinar berdasarkan Id.
+
+Request :
+
+- Method : GET
+- Endpoint : /deteksi/:id
+- Header :
+  - Accept: application/json
+- Response :
+
+```
+{
+    "_id": "ObjectId",
+    "user" : "string",
+    "question" : "string",
+    "totalScore" : "number",
+    "createdAt": "Date",
+    "updatedAt": "Date"
+}
+```
+
+### d. Update Deteksi
+
+Router ini terhubung ke Deteksi collection di MongoDB. hanya role admin yang dapat update data Deteksi berdasarkan Id.
+Request :
+
+- Method : PATCH
+- Endpoint : /deteksi/edit-deteksi/:id
+- Header :
+  - Content-Type: application/json
+  - Accept: application/json
+  - Authorization: bearer token
+- Body :
+
+```
+{
+    "user" : "string",
+    "question" : "string",
+    "totalScore" : "number"
+}
+```
+
+- Response :
+
+```
+{
+    "message": "deteksi updated"
+}
+```
+
+### e. Delete Deteksi
+
+Router ini terhubung ke Deteksi collection di MongoDB. hanya role admin yang dapat delete data Deteksi berdasarkan Id.
+
+Request :
+
+- Method : DELETE
+- Endpoint : /deteksi/delete-deteksi/:id
+- Header :
+  - Accept: application/json
+  - Authorization: bearer token
+- Response :
+
+```
+{
+    "message": "deteksi deleted"
+}
+```
+
+## 14 Dokumentasi Komunitas Collection
+
+| Judul      | Tipe     | Deskripsi                                                                     |
+| ---------- | -------- | ----------------------------------------------------------------------------- |
+| \_id       | ObjectId | ID Deteksi dibuat secara otomatis oleh MongoDB saat admin menambahkan data    |
+| judul      | string   | Judul tentang Dokumentasi Komunitas                                           |
+| deskripsi  | string   | Deskripsi Dokumentasi Komunitas                                               |
+| gambar     | string   | gambar dari Dokumentasi Komunitas                                             |
+| komunitas  | ObjectId | ID dari komunitas                                                             |
+
+### a. Create Dokumentasi Komunitas
+
+Router ini terhubung dengan Dokumentasi Komunitas collection di mongoDB. Hanya bisa diakses oleh role admin.
+
+Request :
+
+- Method : POST
+- Endpoint : /dokumentasi/add-dokumentasi
+- Header :
+  - Tipe konten : application/json
+  - Accept: application/json
+  - Authorization: bearer token
+- Body :
+
+```
+{
+   "judul" : "string",
+   "deskripsi" : "string",
+   "gambar" : "string",
+   "komunitas" : "string" 
+}
+```
+
+- Response :
+
+```
+{
+    "message": "dokumentasi added",
+    "result": {
+        "judul" : "string",
+        "deskripsi" : "string",
+        "gambar" : "string",
+        "komunitas" : "string",
+        "_id": "ObjectId",
+        "createdAt": "Date",
+        "updatedAt": "Date",
+        "__v": 0
+    }
+}
+```
+
+### b. Read All Dokumentasi Komunitas
+
+Router ini terhubung ke Dokumentasi Komunitas collection di MongoDB. role admin,user, dan non user dapat melihat semua Dokumentasi Komunitas.
+
+Request :
+
+- Method : GET
+- Endpoint : /dokumentasi
+- Header :
+  - Accept: application/json
+- Response :
+
+```
+{
+    "_id": "ObjectId",
+    "judul" : "string",
+    "deskripsi" : "string",
+    "gambar" : "string",
+    "komunitas" : "string",
+    "createdAt": "Date",
+    "updatedAt": "Date"
+}
+```
+
+### c. Read by Id Dokumentasi Komunitas
+
+Router ini terhubung ke Dokumentasi Komunitas collection di MongoDB. role admin, user dan non user dapat melihat Dokumentasi Komunitas berdasarkan Id.
+
+Request :
+
+- Method : GET
+- Endpoint : /dokumentasi/:id
+- Header :
+  - Accept: application/json
+- Response :
+
+```
+{
+    "_id": "ObjectId",
+    "judul" : "string",
+    "deskripsi" : "string",
+    "gambar" : "string",
+    "komunitas" : "string",
+    "createdAt": "Date",
+    "updatedAt": "Date"
+}
+```
+
+### d. Update Dokumentasi Komunitas
+
+Router ini terhubung ke Dokumentasi Komunitas collection di MongoDB. hanya role admin yang dapat update data Dokumentasi Komunitas berdasarkan Id.
+Request :
+
+- Method : PATCH
+- Endpoint : /dokumentasi/edit-dokumentasi/:id
+- Header :
+  - Content-Type: application/json
+  - Accept: application/json
+  - Authorization: bearer token
+- Body :
+
+```
+{
+    "judul" : "string",
+    "deskripsi" : "string",
+    "gambar" : "string",
+    "komunitas" : "string"
+}
+```
+
+- Response :
+
+```
+{
+    "message": "Dokumentasi Komunitas updated"
+}
+```
+
+### e. Delete Dokumentasi Komunitas
+
+Router ini terhubung ke Dokumentasi Komunitas collection di MongoDB. hanya role admin yang dapat delete data Dokumentasi Komunitas berdasarkan Id.
+
+Request :
+
+- Method : DELETE
+- Endpoint : /deteksi/delete-deteksi/:id
+- Header :
+  - Accept: application/json
+  - Authorization: bearer token
+- Response :
+
+```
+{
+    "message": "Dokumentasi Komunitas deleted"
+}
+```
+
+## 15 Paket Konsultasi Collection
+
+| Judul     | Tipe     | Deskripsi                                                                     |
+| --------- | -------- | ----------------------------------------------------------------------------- |
+| \_id      | ObjectId | ID Deteksi dibuat secara otomatis oleh MongoDB saat admin menambahkan data    |
+| name      | string   | nama Paket Konsultasi                                                         |
+| deskripsi | string   | Deskripsi Paket Konsultasi                                                    |
+| harga     | string   | harga dari Paket Konsultasi                                                   |
+
+### a. Create Paket Konsultasi
+
+Router ini terhubung dengan Paket Konsultasi collection di mongoDB. Hanya bisa diakses oleh role admin.
+
+Request :
+
+- Method : POST
+- Endpoint : /paket/add-paket
+- Header :
+  - Tipe konten : application/json
+  - Accept: application/json
+  - Authorization: bearer token
+- Body :
+
+```
+{
+   "name" : "string",
+   "deskripsi" : "string",
+   "harga" : "string",
+}
+```
+
+- Response :
+
+```
+{
+    "message": "paket konsultasi added",
+    "result": {
+        "name" : "string",
+        "deskripsi" : "string",
+        "harga" : "string",
+        "_id": "ObjectId",
+        "createdAt": "Date",
+        "updatedAt": "Date",
+        "__v": 0
+    }
+}
+```
+
+### b. Read All Paket Konsultasi
+
+Router ini terhubung ke Paket Konsultasi collection di MongoDB. role admin,user, dan non user dapat melihat semua Paket Konsultasi.
+
+Request :
+
+- Method : GET
+- Endpoint : /paket
+- Header :
+  - Accept: application/json
+- Response :
+
+```
+{
+    "_id": "ObjectId",
+    "name" : "string",
+    "deskripsi" : "string",
+    "harga" : "string",
+    "createdAt": "Date",
+    "updatedAt": "Date"
+}
+```
+
+### c. Read by Id Paket Konsultasi
+
+Router ini terhubung ke Paket Konsultasi collection di MongoDB. role admin, user dan non user dapat melihat Paket Konsultasi berdasarkan Id.
+
+Request :
+
+- Method : GET
+- Endpoint : /paket/:id
+- Header :
+  - Accept: application/json
+- Response :
+
+```
+{
+    "_id": "ObjectId",
+    "name" : "string",
+    "deskripsi" : "string",
+    "harga" : "string",
+    "createdAt": "Date",
+    "updatedAt": "Date"
+}
+```
+
+### d. Update Paket Konsultasi
+
+Router ini terhubung ke Paket Konsultasi collection di MongoDB. hanya role admin yang dapat update data Paket Konsultasi berdasarkan Id.
+Request :
+
+- Method : PATCH
+- Endpoint : /paket/edit-paket/:id
+- Header :
+  - Content-Type: application/json
+  - Accept: application/json
+  - Authorization: bearer token
+- Body :
+
+```
+{
+    "name" : "string",
+    "deskripsi" : "string",
+    "harga" : "string"
+}
+```
+
+- Response :
+
+```
+{
+    "message": "Paket Konsultasi updated"
+}
+```
+
+### e. Delete Paket Konsultasi
+
+Router ini terhubung ke Paket Konsultasi collection di MongoDB. hanya role admin yang dapat delete data Paket Konsultasi berdasarkan Id.
+
+Request :
+
+- Method : DELETE
+- Endpoint : /paket/delete-paket/:id
+- Header :
+  - Accept: application/json
+  - Authorization: bearer token
+- Response :
+
+```
+{
+    "message": "Paket Konsultasi deleted"
 }
 ```
