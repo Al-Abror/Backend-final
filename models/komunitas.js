@@ -16,12 +16,18 @@ const komunitasSchema = new mongoose.Schema({
         type: String,
         default: "https://thumbs.dreamstime.com/z/no-image-vector-isolated-white-background-no-image-vector-illustration-isolated-156298619.jpg"
     },
-    dokumentasi : [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'dokumentasi'
-        }
-    ]
+    judul_dokumentasi: {
+        type: String,
+        required: true,
+    },
+    desk_dokumentasi: {
+        type: String,
+        required: true,
+    },
+    gambar_dokumentasi: {
+        type: String,
+        required: true,
+    },
 }, timestamps);
 
 
