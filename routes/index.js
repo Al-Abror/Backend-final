@@ -14,6 +14,7 @@ const paketRouter = require('./paket.route')
 const testiPsikologRouter = require('./testiPsikolog.route')
 const dokumentasiRouter = require('./dokumentasi.route')
 const deteksiRouter = require('./deteksi.route')
+const paymentRouter = require('./payment.route')
 
 router.get("/", (req, res) => {
     res.status(200).send('Hello, welcome to cure.it API')
@@ -35,5 +36,6 @@ router.use('/deteksi', deteksiRouter)
 
 router.use(adminRouter)
 router.use(userRouter)
+router.use(paymentRouter)
 
 module.exports = router

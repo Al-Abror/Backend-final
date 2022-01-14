@@ -14,5 +14,6 @@ module.exports = {
     PaketController: require('./paket.controller'),
     TestiPsikologController: require('./testiPsikolog.controller'),
     DokumentasiController: require('./dokumentasi.controller'),
-    DeteksiController : require('./deteksi.controller')
+    DeteksiController : require('./deteksi.controller'),
+    PaymentController : require('./payment.controller'),
 } 
